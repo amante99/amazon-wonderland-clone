@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Heart, Star, ShoppingCart, Check } from "lucide-react";
 import { Product } from "@/lib/data";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +15,7 @@ export const ProductCard = ({ product, featured = false }: ProductCardProps) => 
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const { addToCart } = useCart();
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -32,10 +34,10 @@ export const ProductCard = ({ product, featured = false }: ProductCardProps) => 
     e.stopPropagation();
     setIsAddingToCart(true);
     
-    // Simulate API request
+    // Add to cart with animation
     setTimeout(() => {
+      addToCart(product, 1);
       setIsAddingToCart(false);
-      toast(`${product.name} added to cart`);
     }, 600);
   };
 

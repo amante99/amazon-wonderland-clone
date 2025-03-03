@@ -2,13 +2,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 export const CartButton = () => {
-  const [itemCount, setItemCount] = useState(0);
+  const { cartItems, itemCount, subtotal } = useCart();
   const [isHovered, setIsHovered] = useState(false);
-
-  // For demo purposes, we'll just simulate having items in cart
-  // In a real app, this would come from a cart state/context
 
   return (
     <Link 
@@ -35,20 +33,33 @@ export const CartButton = () => {
           </div>
           
           <div className="space-y-3 max-h-60 overflow-auto">
-            {/* This would be mapped from actual cart items */}
-            <div className="flex gap-3">
-              <div className="w-12 h-12 bg-gray-100 rounded"></div>
-              <div>
-                <p className="text-sm font-medium line-clamp-1">Product Name</p>
-                <p className="text-xs text-muted-foreground">1 × $99.99</p>
+            {cartItems.slice(0, 3).map(item => (
+              <div key={item.id} className="flex gap-3">
+                <div className="w-12 h-12 bg-gray-100 rounded overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium line-clamp-1">{item.name}</p>
+                  <p className="text-xs text-muted-foreground">{item.quantity} × ${item.price.toFixed(2)}</p>
+                </div>
               </div>
-            </div>
+            ))}
+            
+            {cartItems.length > 3 && (
+              <p className="text-xs text-center text-muted-foreground">
+                +{cartItems.length - 3} more items
+              </p>
+            )}
           </div>
           
           <div className="mt-3 pt-3 border-t border-gray-100">
             <div className="flex justify-between mb-3">
               <span className="text-sm font-medium">Subtotal:</span>
-              <span className="text-sm font-medium">$99.99</span>
+              <span className="text-sm font-medium">${subtotal.toFixed(2)}</span>
             </div>
             
             <div className="flex flex-col gap-2">
