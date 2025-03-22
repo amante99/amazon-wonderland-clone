@@ -15,7 +15,8 @@ import {
   Map, 
   MapPin, 
   Calendar, 
-  TruckIcon
+  TruckIcon,
+  Check
 } from "lucide-react";
 import { getRecommendedProducts, getUserOrders, Order } from "@/lib/data";
 import { useWishlist } from "@/contexts/WishlistContext";
