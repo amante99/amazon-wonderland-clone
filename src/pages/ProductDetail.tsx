@@ -19,6 +19,8 @@ import {
   ChevronRight
 } from "lucide-react";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,9 +28,11 @@ const ProductDetail = () => {
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [activeTab, setActiveTab] = useState<"description" | "specifications" | "reviews">("description");
+  
+  const { addToCart } = useCart();
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
   useEffect(() => {
     // Scroll to top when navigating to product detail
@@ -60,22 +64,21 @@ const ProductDetail = () => {
     
     setIsAddingToCart(true);
     
-    // Simulate API request
+    // Add to cart
     setTimeout(() => {
+      addToCart(product, quantity);
       setIsAddingToCart(false);
-      toast(`${quantity} × ${product.name} added to cart`);
     }, 600);
   };
 
   const handleToggleWishlist = () => {
     if (!product) return;
     
-    setIsWishlisted(!isWishlisted);
-    toast(
-      isWishlisted 
-        ? `${product.name} removed from wishlist` 
-        : `${product.name} added to wishlist`
-    );
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   if (!product) {
@@ -102,6 +105,8 @@ const ProductDetail = () => {
   const discount = product.originalPrice 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) 
     : 0;
+
+  const isProductInWishlist = isInWishlist(product.id);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -306,14 +311,14 @@ const ProductDetail = () => {
                 <button
                   onClick={handleToggleWishlist}
                   className={`py-3 px-4 rounded-full font-medium border transition-all flex items-center justify-center ${
-                    isWishlisted 
+                    isProductInWishlist 
                       ? "bg-red-50 border-red-200 text-red-500" 
                       : "border-gray-300 hover:border-gray-400"
                   }`}
                 >
                   <Heart 
                     size={20} 
-                    className={`mr-2 ${isWishlisted ? "fill-red-500" : ""}`} 
+                    className={`mr-2 ${isProductInWishlist ? "fill-red-500" : ""}`} 
                   />
                   Wishlist
                 </button>

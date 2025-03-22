@@ -1,4 +1,3 @@
-
 export interface Product {
   id: string;
   name: string;
@@ -236,36 +235,148 @@ export const products: Product[] = [
   },
 ];
 
-// Helper function to get products by category
 export const getProductsByCategory = (categoryId: string): Product[] => {
   return products.filter(product => product.category === categoryId);
 };
 
-// Helper function to get a product by ID
 export const getProductById = (productId: string): Product | undefined => {
   return products.find(product => product.id === productId);
 };
 
-// Helper function to get featured categories
 export const getFeaturedCategories = (): Category[] => {
   return categories.filter(category => category.featured);
 };
 
-// Helper function to get best sellers
 export const getBestSellers = (): Product[] => {
   return products.filter(product => product.bestSeller);
 };
 
-// Helper function to get recommended products
-// For simplicity, returns a shuffled subset of products as recommendations
 export const getRecommendedProducts = (): Product[] => {
-  // Return a randomized subset of products for recommendations
   return [...products]
     .sort(() => Math.random() - 0.5)
     .slice(0, Math.min(8, products.length));
 };
 
-// Helper function to search products
+export interface Order {
+  id: string;
+  date: string;
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  total: number;
+  items: {
+    product: Product;
+    quantity: number;
+    price: number;
+  }[];
+  shippingAddress: {
+    name: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  };
+  paymentMethod: {
+    type: 'credit_card' | 'paypal' | 'bank_transfer';
+    lastFour?: string;
+  };
+}
+
+export const sampleOrders: Order[] = [
+  {
+    id: "ORD-2023-001",
+    date: "2023-10-15",
+    status: "delivered",
+    total: 348.97,
+    items: [
+      {
+        product: products[0], // Premium Wireless Headphones
+        quantity: 1,
+        price: 249.99
+      },
+      {
+        product: products[2], // Slim Fit Cotton T-Shirt
+        quantity: 2,
+        price: 19.99
+      },
+      {
+        product: products[7], // Wireless Charging Station
+        quantity: 1,
+        price: 39.99
+      }
+    ],
+    shippingAddress: {
+      name: "John Doe",
+      street: "123 Main St",
+      city: "Austin",
+      state: "Texas",
+      zipCode: "78701",
+      country: "United States"
+    },
+    paymentMethod: {
+      type: "credit_card",
+      lastFour: "4242"
+    }
+  },
+  {
+    id: "ORD-2023-002",
+    date: "2023-11-02",
+    status: "shipped",
+    total: 229.98,
+    items: [
+      {
+        product: products[10], // Fitness Smartwatch
+        quantity: 1,
+        price: 199.99
+      },
+      {
+        product: products[5], // Bestselling Novel Collection
+        quantity: 1,
+        price: 29.99
+      }
+    ],
+    shippingAddress: {
+      name: "John Doe",
+      street: "123 Main St",
+      city: "Austin",
+      state: "Texas",
+      zipCode: "78701",
+      country: "United States"
+    },
+    paymentMethod: {
+      type: "paypal"
+    }
+  },
+  {
+    id: "ORD-2023-003",
+    date: "2023-12-10",
+    status: "processing",
+    total: 129.99,
+    items: [
+      {
+        product: products[9], // Premium Coffee Maker
+        quantity: 1,
+        price: 129.99
+      }
+    ],
+    shippingAddress: {
+      name: "John Doe",
+      street: "123 Main St",
+      city: "Austin",
+      state: "Texas",
+      zipCode: "78701",
+      country: "United States"
+    },
+    paymentMethod: {
+      type: "credit_card",
+      lastFour: "1234"
+    }
+  }
+];
+
+export const getUserOrders = (): Order[] => {
+  return sampleOrders;
+};
+
 export const searchProducts = (query: string): Product[] => {
   const lowercaseQuery = query.toLowerCase();
   return products.filter(product => 
