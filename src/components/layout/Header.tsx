@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SearchBar } from "../ui/SearchBar";
 import { CartButton } from "../ui/CartButton";
 import { Menu, X, User, Heart, ShoppingBag, LogIn } from "lucide-react";
+import { useWishlist } from "@/contexts/WishlistContext";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,6 +12,7 @@ export const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { itemCount: wishlistCount } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,9 +92,14 @@ export const Header = () => {
                 </>
               )}
             </button>
-            <Link to="/wishlist" className="icon-button hidden md:flex">
+            <Link to="/wishlist" className="icon-button hidden md:flex relative">
               <Heart size={20} />
               <span className="ml-1 text-sm hidden lg:inline">Wishlist</span>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
             </Link>
             <CartButton />
 
@@ -151,6 +158,11 @@ export const Header = () => {
               <Link to="/wishlist" className="mobile-nav-link flex items-center">
                 <Heart size={18} className="mr-2" />
                 Wishlist
+                {wishlistCount > 0 && (
+                  <span className="ml-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
               </Link>
               <Link to="/orders" className="mobile-nav-link flex items-center">
                 <ShoppingBag size={18} className="mr-2" />

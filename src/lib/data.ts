@@ -235,6 +235,176 @@ export const products: Product[] = [
   },
 ];
 
+export const electronicsProducts: Product[] = [
+  {
+    id: "e1",
+    name: "Smart LED TV - 55 inch",
+    description: "4K Ultra HD Smart LED TV with voice control and multiple streaming apps",
+    price: 699.99,
+    originalPrice: 899.99,
+    rating: 4.6,
+    reviewCount: 873,
+    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "electronics",
+    tags: ["tv", "smart home", "entertainment"],
+    stock: 25,
+    freeShipping: true,
+  },
+  {
+    id: "e2",
+    name: "Laptop Pro X",
+    description: "Ultra-thin laptop with powerful processor, 16GB RAM and 512GB SSD",
+    price: 1299.99,
+    rating: 4.8,
+    reviewCount: 654,
+    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "electronics",
+    tags: ["laptop", "computer", "work"],
+    bestSeller: true,
+    stock: 18,
+  },
+  {
+    id: "e3",
+    name: "Wireless Gaming Mouse",
+    description: "Ergonomic gaming mouse with customizable RGB lighting and programmable buttons",
+    price: 79.99,
+    originalPrice: 99.99,
+    rating: 4.5,
+    reviewCount: 427,
+    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "electronics",
+    tags: ["gaming", "mouse", "computer accessories"],
+    stock: 42,
+  }
+];
+
+export const clothingProducts: Product[] = [
+  {
+    id: "c1",
+    name: "Men's Classic Suit",
+    description: "Tailored fit suit in charcoal gray, perfect for professional occasions",
+    price: 299.99,
+    rating: 4.7,
+    reviewCount: 382,
+    image: "https://images.unsplash.com/photo-1593032465175-481ac7f401a0?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "clothing",
+    tags: ["men", "formal", "suit"],
+    stock: 31,
+  },
+  {
+    id: "c2",
+    name: "Women's Summer Dress",
+    description: "Light and flowy summer dress with floral pattern",
+    price: 59.99,
+    originalPrice: 79.99,
+    rating: 4.4,
+    reviewCount: 287,
+    image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "clothing",
+    tags: ["women", "summer", "dress"],
+    bestSeller: true,
+    stock: 47,
+    freeShipping: true,
+  },
+  {
+    id: "c3",
+    name: "Casual Denim Jacket",
+    description: "Classic denim jacket with comfortable fit, great for layering",
+    price: 89.99,
+    rating: 4.6,
+    reviewCount: 215,
+    image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "clothing",
+    tags: ["denim", "jacket", "casual"],
+    stock: 38,
+  }
+];
+
+export const homeProducts: Product[] = [
+  {
+    id: "h1",
+    name: "Luxury Bedding Set",
+    description: "Premium 100% Egyptian cotton bedding set with duvet cover and pillowcases",
+    price: 149.99,
+    originalPrice: 199.99,
+    rating: 4.9,
+    reviewCount: 456,
+    image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "home",
+    tags: ["bedding", "bedroom", "luxury"],
+    bestSeller: true,
+    stock: 22,
+    freeShipping: true,
+  },
+  {
+    id: "h2",
+    name: "Smart Home Thermostat",
+    description: "Programmable smart thermostat with energy-saving features and app control",
+    price: 129.99,
+    rating: 4.7,
+    reviewCount: 328,
+    image: "https://images.unsplash.com/photo-1567935850829-e52d7bfe37ce?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "home",
+    tags: ["smart home", "energy", "thermostat"],
+    stock: 19,
+  },
+  {
+    id: "h3",
+    name: "Modern Coffee Table",
+    description: "Minimalist design coffee table with tempered glass top and wooden legs",
+    price: 249.99,
+    originalPrice: 299.99,
+    rating: 4.6,
+    reviewCount: 187,
+    image: "https://images.unsplash.com/photo-1567016376408-0226e4d0b046?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "home",
+    tags: ["furniture", "living room", "modern"],
+    stock: 12,
+  }
+];
+
+export const booksProducts: Product[] = [
+  {
+    id: "b1",
+    name: "The Midnight Library",
+    description: "Between life and death there is a library, and within that library, the shelves go on forever.",
+    price: 16.99,
+    rating: 4.8,
+    reviewCount: 723,
+    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "books",
+    tags: ["fiction", "bestseller", "novel"],
+    bestSeller: true,
+    stock: 45,
+    freeShipping: true,
+  },
+  {
+    id: "b2",
+    name: "The Art of Cooking",
+    description: "Comprehensive cookbook with easy-to-follow recipes and cooking techniques",
+    price: 34.99,
+    originalPrice: 44.99,
+    rating: 4.7,
+    reviewCount: 412,
+    image: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "books",
+    tags: ["cookbook", "food", "recipes"],
+    stock: 28,
+  },
+  {
+    id: "b3",
+    name: "World History Encyclopedia",
+    description: "Illustrated guide to world history from ancient civilizations to modern times",
+    price: 49.99,
+    rating: 4.9,
+    reviewCount: 156,
+    image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    category: "books",
+    tags: ["history", "education", "reference"],
+    stock: 17,
+  }
+];
+
 export const getProductsByCategory = (categoryId: string): Product[] => {
   return products.filter(product => product.category === categoryId);
 };
@@ -255,6 +425,21 @@ export const getRecommendedProducts = (): Product[] => {
   return [...products]
     .sort(() => Math.random() - 0.5)
     .slice(0, Math.min(8, products.length));
+};
+
+export const getAllCategoryProducts = (categoryId: string): Product[] => {
+  switch(categoryId) {
+    case "electronics":
+      return electronicsProducts;
+    case "clothing":
+      return clothingProducts;
+    case "home":
+      return homeProducts;
+    case "books":
+      return booksProducts;
+    default:
+      return products.filter(product => product.category === categoryId);
+  }
 };
 
 export interface Order {
