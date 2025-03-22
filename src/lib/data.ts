@@ -256,6 +256,15 @@ export const getBestSellers = (): Product[] => {
   return products.filter(product => product.bestSeller);
 };
 
+// Helper function to get recommended products
+// For simplicity, returns a shuffled subset of products as recommendations
+export const getRecommendedProducts = (): Product[] => {
+  // Return a randomized subset of products for recommendations
+  return [...products]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, Math.min(8, products.length));
+};
+
 // Helper function to search products
 export const searchProducts = (query: string): Product[] => {
   const lowercaseQuery = query.toLowerCase();
