@@ -1,14 +1,16 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SearchBar } from "../ui/SearchBar";
 import { CartButton } from "../ui/CartButton";
-import { Menu, X, User, Heart, ShoppingBag } from "lucide-react";
+import { Menu, X, User, Heart, ShoppingBag, LogIn } from "lucide-react";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +24,20 @@ export const Header = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
+
+  // Check if user is logged in
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loginStatus);
+  }, [location.pathname]);
+
+  const handleAccountClick = () => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    } else {
+      navigate("/account");
+    }
+  };
 
   return (
     <header 
@@ -58,10 +74,22 @@ export const Header = () => {
 
           {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
-            <Link to="/account" className="icon-button hidden md:flex">
-              <User size={20} />
-              <span className="ml-1 text-sm hidden lg:inline">Account</span>
-            </Link>
+            <button 
+              onClick={handleAccountClick} 
+              className="icon-button hidden md:flex"
+            >
+              {isLoggedIn ? (
+                <>
+                  <User size={20} />
+                  <span className="ml-1 text-sm hidden lg:inline">Account</span>
+                </>
+              ) : (
+                <>
+                  <LogIn size={20} />
+                  <span className="ml-1 text-sm hidden lg:inline">Sign In</span>
+                </>
+              )}
+            </button>
             <Link to="/wishlist" className="icon-button hidden md:flex">
               <Heart size={20} />
               <span className="ml-1 text-sm hidden lg:inline">Wishlist</span>
@@ -104,10 +132,22 @@ export const Header = () => {
               <Link to="/category/books" className="mobile-nav-link">Books</Link>
               <Link to="/deals" className="mobile-nav-link">Today's Deals</Link>
               <div className="h-px bg-gray-200 my-2"></div>
-              <Link to="/account" className="mobile-nav-link flex items-center">
-                <User size={18} className="mr-2" />
-                Account
-              </Link>
+              <button 
+                onClick={handleAccountClick}
+                className="mobile-nav-link flex items-center"
+              >
+                {isLoggedIn ? (
+                  <>
+                    <User size={18} className="mr-2" />
+                    Account
+                  </>
+                ) : (
+                  <>
+                    <LogIn size={18} className="mr-2" />
+                    Sign In
+                  </>
+                )}
+              </button>
               <Link to="/wishlist" className="mobile-nav-link flex items-center">
                 <Heart size={18} className="mr-2" />
                 Wishlist
